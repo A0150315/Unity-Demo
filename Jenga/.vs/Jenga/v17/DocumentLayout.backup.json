@@ -1,0 +1,272 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\P8\\Q1\\Jenga\\Jenga\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\BlockSwing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scenes\\Jenga\\BlockSwing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20B71582-A6C9-B0FF-6281-A7C6F4266715}|Assembly-CSharp.csproj|E:\\P8\\Q1\\Jenga\\Jenga\\assets\\scenes\\jenga\\scripts\\blockspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{20B71582-A6C9-B0FF-6281-A7C6F4266715}|Assembly-CSharp.csproj|solutionrelative:assets\\scenes\\jenga\\scripts\\blockspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\Scripts\\NewBehaviourScript.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scenes\\Jenga\\Scripts\\NewBehaviourScript.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20B71582-A6C9-B0FF-6281-A7C6F4266715}|Assembly-CSharp.csproj|E:\\P8\\Q1\\Jenga\\Jenga\\assets\\stylizedwater2\\_demo\\cameraclickmove.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{20B71582-A6C9-B0FF-6281-A7C6F4266715}|Assembly-CSharp.csproj|solutionrelative:assets\\stylizedwater2\\_demo\\cameraclickmove.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20B71582-A6C9-B0FF-6281-A7C6F4266715}|Assembly-CSharp.csproj|E:\\P8\\Q1\\Jenga\\Jenga\\assets\\scenes\\jenga\\scripts\\cubecollisionsound.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{20B71582-A6C9-B0FF-6281-A7C6F4266715}|Assembly-CSharp.csproj|solutionrelative:assets\\scenes\\jenga\\scripts\\cubecollisionsound.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\Scripts\\CameraClickMove.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scenes\\Jenga\\Scripts\\CameraClickMove.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\Scripts\\BlockShaker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scenes\\Jenga\\Scripts\\BlockShaker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78FACF32-16EB-F945-88A0-6231F64559BB}|WxEditor.csproj|E:\\P8\\Q1\\Jenga\\Jenga\\assets\\wx-wasm-sdk-v2\\editor\\wxeditorsettinghelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78FACF32-16EB-F945-88A0-6231F64559BB}|WxEditor.csproj|solutionrelative:assets\\wx-wasm-sdk-v2\\editor\\wxeditorsettinghelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20B71582-A6C9-B0FF-6281-A7C6F4266715}|Assembly-CSharp.csproj|E:\\P8\\Q1\\Jenga\\Jenga\\assets\\scenes\\jenga\\scripts\\sceneloader1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{20B71582-A6C9-B0FF-6281-A7C6F4266715}|Assembly-CSharp.csproj|solutionrelative:assets\\scenes\\jenga\\scripts\\sceneloader1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\BlockSpawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scenes\\Jenga\\BlockSpawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\NewBehaviourScript.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scenes\\Jenga\\NewBehaviourScript.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Walking dead in Jungle\\Assets\\Assets\\Guns\\ProWeapons Kit\\Scripts\\ProWeapons\\Explosive.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Walking dead in Jungle\\Assets\\Assets\\Guns\\ProWeapons Kit\\Scripts\\ProWeapons\\Explosive.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\CameraClickMove.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scenes\\Jenga\\CameraClickMove.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\CubeFollowCameraMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scenes\\Jenga\\CubeFollowCameraMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\BlockCollisionHandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scenes\\Jenga\\BlockCollisionHandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\Scripts\\PauseShakingOnUIClick.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scenes\\Jenga\\Scripts\\PauseShakingOnUIClick.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CameraClickMove.cs",
+              "DocumentMoniker": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\StylizedWater2\\_Demo\\CameraClickMove.cs",
+              "RelativeDocumentMoniker": "Assets\\StylizedWater2\\_Demo\\CameraClickMove.cs",
+              "ToolTip": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\StylizedWater2\\_Demo\\CameraClickMove.cs",
+              "RelativeToolTip": "Assets\\StylizedWater2\\_Demo\\CameraClickMove.cs",
+              "ViewState": "AgIAAM0AAAAAAAAAAAAmwN0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-13T10:13:48.035Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CubeFollowCameraMovement.cs",
+              "DocumentMoniker": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\CubeFollowCameraMovement.cs",
+              "RelativeDocumentMoniker": "Assets\\Scenes\\Jenga\\CubeFollowCameraMovement.cs",
+              "ToolTip": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\CubeFollowCameraMovement.cs",
+              "RelativeToolTip": "Assets\\Scenes\\Jenga\\CubeFollowCameraMovement.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAYwCsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T14:05:22.515Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BlockSwing.cs",
+              "DocumentMoniker": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\BlockSwing.cs",
+              "RelativeDocumentMoniker": "Assets\\Scenes\\Jenga\\BlockSwing.cs",
+              "ToolTip": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\BlockSwing.cs",
+              "RelativeToolTip": "Assets\\Scenes\\Jenga\\BlockSwing.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T13:41:50.438Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "BlockCollisionHandler.cs",
+              "DocumentMoniker": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\BlockCollisionHandler.cs",
+              "RelativeDocumentMoniker": "Assets\\Scenes\\Jenga\\BlockCollisionHandler.cs",
+              "ToolTip": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\BlockCollisionHandler.cs",
+              "RelativeToolTip": "Assets\\Scenes\\Jenga\\BlockCollisionHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-03T14:28:15.033Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "NewBehaviourScript.cs",
+              "DocumentMoniker": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\NewBehaviourScript.cs",
+              "RelativeDocumentMoniker": "Assets\\Scenes\\Jenga\\NewBehaviourScript.cs",
+              "ToolTip": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\NewBehaviourScript.cs",
+              "RelativeToolTip": "Assets\\Scenes\\Jenga\\NewBehaviourScript.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAYwBsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-03T13:44:50.594Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "BlockSpawner.cs",
+              "DocumentMoniker": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\BlockSpawner.cs",
+              "RelativeDocumentMoniker": "Assets\\Scenes\\Jenga\\BlockSpawner.cs",
+              "ToolTip": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\BlockSpawner.cs",
+              "RelativeToolTip": "Assets\\Scenes\\Jenga\\BlockSpawner.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-03T12:18:49.419Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Explosive.cs",
+              "DocumentMoniker": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Walking dead in Jungle\\Assets\\Assets\\Guns\\ProWeapons Kit\\Scripts\\ProWeapons\\Explosive.cs",
+              "RelativeDocumentMoniker": "Assets\\Walking dead in Jungle\\Assets\\Assets\\Guns\\ProWeapons Kit\\Scripts\\ProWeapons\\Explosive.cs",
+              "ToolTip": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Walking dead in Jungle\\Assets\\Assets\\Guns\\ProWeapons Kit\\Scripts\\ProWeapons\\Explosive.cs",
+              "RelativeToolTip": "Assets\\Walking dead in Jungle\\Assets\\Assets\\Guns\\ProWeapons Kit\\Scripts\\ProWeapons\\Explosive.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-03T06:19:58.677Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "NewBehaviourScript.cs",
+              "DocumentMoniker": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\Scripts\\NewBehaviourScript.cs",
+              "RelativeDocumentMoniker": "Assets\\Scenes\\Jenga\\Scripts\\NewBehaviourScript.cs",
+              "ToolTip": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\Scripts\\NewBehaviourScript.cs",
+              "RelativeToolTip": "Assets\\Scenes\\Jenga\\Scripts\\NewBehaviourScript.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T19:23:44.105Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CubeCollisionSound.cs",
+              "DocumentMoniker": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\Scripts\\CubeCollisionSound.cs",
+              "RelativeDocumentMoniker": "Assets\\Scenes\\Jenga\\Scripts\\CubeCollisionSound.cs",
+              "ToolTip": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\Scripts\\CubeCollisionSound.cs",
+              "RelativeToolTip": "Assets\\Scenes\\Jenga\\Scripts\\CubeCollisionSound.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAowDYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T15:46:22.831Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BlockSpawner.cs",
+              "DocumentMoniker": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\Scripts\\BlockSpawner.cs",
+              "RelativeDocumentMoniker": "Assets\\Scenes\\Jenga\\Scripts\\BlockSpawner.cs",
+              "ToolTip": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\Scripts\\BlockSpawner.cs",
+              "RelativeToolTip": "Assets\\Scenes\\Jenga\\Scripts\\BlockSpawner.cs",
+              "ViewState": "AgIAAIoAAAAAAAAAAAAiwJYAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T14:29:52.478Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CameraClickMove.cs",
+              "DocumentMoniker": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\Scripts\\CameraClickMove.cs",
+              "RelativeDocumentMoniker": "Assets\\Scenes\\Jenga\\Scripts\\CameraClickMove.cs",
+              "ToolTip": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\Scripts\\CameraClickMove.cs",
+              "RelativeToolTip": "Assets\\Scenes\\Jenga\\Scripts\\CameraClickMove.cs",
+              "ViewState": "AgIAAHMAAAAAAAAAAAAUwHoAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-08T05:39:41.881Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CameraClickMove.cs",
+              "DocumentMoniker": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\CameraClickMove.cs",
+              "RelativeDocumentMoniker": "Assets\\Scenes\\Jenga\\CameraClickMove.cs",
+              "ToolTip": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\CameraClickMove.cs",
+              "RelativeToolTip": "Assets\\Scenes\\Jenga\\CameraClickMove.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAIwGwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T14:05:24.208Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "PauseShakingOnUIClick.cs",
+              "DocumentMoniker": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\Scripts\\PauseShakingOnUIClick.cs",
+              "RelativeDocumentMoniker": "Assets\\Scenes\\Jenga\\Scripts\\PauseShakingOnUIClick.cs",
+              "ToolTip": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\Scripts\\PauseShakingOnUIClick.cs",
+              "RelativeToolTip": "Assets\\Scenes\\Jenga\\Scripts\\PauseShakingOnUIClick.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-12T12:34:09.353Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "BlockShaker.cs",
+              "DocumentMoniker": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\Scripts\\BlockShaker.cs",
+              "RelativeDocumentMoniker": "Assets\\Scenes\\Jenga\\Scripts\\BlockShaker.cs",
+              "ToolTip": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\Scripts\\BlockShaker.cs",
+              "RelativeToolTip": "Assets\\Scenes\\Jenga\\Scripts\\BlockShaker.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-12T12:34:18.302Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "WXEditorSettingHelper.cs",
+              "DocumentMoniker": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\WX-WASM-SDK-V2\\Editor\\WXEditorSettingHelper.cs",
+              "RelativeDocumentMoniker": "Assets\\WX-WASM-SDK-V2\\Editor\\WXEditorSettingHelper.cs",
+              "ToolTip": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\WX-WASM-SDK-V2\\Editor\\WXEditorSettingHelper.cs",
+              "RelativeToolTip": "Assets\\WX-WASM-SDK-V2\\Editor\\WXEditorSettingHelper.cs",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAmwE0AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T19:40:54.378Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "SceneLoader1.cs",
+              "DocumentMoniker": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\Scripts\\SceneLoader1.cs",
+              "RelativeDocumentMoniker": "Assets\\Scenes\\Jenga\\Scripts\\SceneLoader1.cs",
+              "ToolTip": "E:\\P8\\Q1\\Jenga\\Jenga\\Assets\\Scenes\\Jenga\\Scripts\\SceneLoader1.cs",
+              "RelativeToolTip": "Assets\\Scenes\\Jenga\\Scripts\\SceneLoader1.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAwA4AAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T14:11:32.237Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

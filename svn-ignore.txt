@@ -1,0 +1,64 @@
+# 如何应用SVN忽略规则:
+# 使用以下命令将忽略规则应用到当前目录
+# svn propset svn:ignore -F svn-ignore.txt .
+#
+# 或者递归应用到所有子目录
+# find . -type d -not -path "*.svn*" -exec svn propset svn:ignore -F svn-ignore.txt {} \;
+# 需要提交的目录/文件
+# 1. Assets/ - 主要提交内容，尤其关注：
+#   Assets/Scenes/ - 所有场景文件
+#   Assets/Scripts/ - 所有脚本代码
+#   Assets/Prefabs/ - 预制件
+#   Assets/Materials/ - 材质
+#   Assets/Models/ - 模型
+#   Assets/Textures/ - 纹理资源
+# 2. ProjectSettings/ - 项目设置文件，保证团队一致性
+# 3. Packages/manifest.json - 包管理文件
+# 不应提交的目录
+# 1. Library/ - Unity生成的临时库文件
+# 2. Temp/ - 临时文件
+# 3. obj/ - 编译中间文件
+# 4. Logs/ - 日志文件
+# 5. .vs/ 或 .vscode/ - IDE设置文件
+# 6. Build/ - 构建输出目录
+
+
+Library
+Temp
+obj
+Build
+Builds
+Logs
+UserSettings
+.vs
+.vscode
+.idea
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.apk
+*.aab
+*.unitypackage
+*.app
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+WebGL
+WebGLBuild 
