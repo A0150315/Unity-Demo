@@ -8,8 +8,6 @@ public class HomeCameraClickMove : MonoBehaviour
     public Vector3 moveOffset;
     // 引用主摄像机
     public Camera mainCamera;
-    // 记录摄像机的初始位置
-    private Vector3 initialCameraPosition;
     // 用于触发 4 秒倒计时和开始移动的 UI 按钮引用
     public Button startButton;
     // 两个用于恢复镜头位置的 UI 按钮的引用
@@ -47,14 +45,6 @@ public class HomeCameraClickMove : MonoBehaviour
         if (mainCamera == null)
         {
             mainCamera = Camera.main;
-        }
-        // 记录摄像机的初始位置
-        initialCameraPosition = mainCamera.transform.position;
-
-        // 为开始按钮添加点击事件监听
-        if (startButton != null)
-        {
-            startButton.onClick.AddListener(StartFourSecondCountdown);
         }
 
         // 为恢复镜头位置的按钮添加点击事件监听
@@ -98,50 +88,6 @@ public class HomeCameraClickMove : MonoBehaviour
             // 启动协程进行平滑移动
             StartCoroutine(SmoothMove(mainCamera.transform.position + moveOffset));
         }
-    }
-
-    // 开始 4 秒倒计时
-    private void StartFourSecondCountdown()
-    {
-        if (!isCountingDown)
-        {
-            StartCoroutine(FourSecondCountdown());
-        }
-    }
-
-    // 4 秒倒计时协程
-    private IEnumerator FourSecondCountdown()
-    {
-        isCountingDown = true;
-        canCameraMove = false;
-
-        if (countdownText != null)
-        {
-            countdownText.gameObject.SetActive(true);
-        }
-
-        for (int i = 3; i > 0; i--)
-        {
-            if (countdownText != null)
-            {
-                countdownText.text = i.ToString();
-            }
-            yield return new WaitForSeconds(1f);
-        }
-
-        if (countdownText != null)
-        {
-            countdownText.text = "GO";
-        }
-        yield return new WaitForSeconds(1f);
-
-        if (countdownText != null)
-        {
-            countdownText.gameObject.SetActive(false);
-        }
-
-        isCountingDown = false;
-        canCameraMove = true;
     }
 
     // 按钮 1 点击事件处理方法
@@ -194,13 +140,6 @@ public class HomeCameraClickMove : MonoBehaviour
         }
         mainCamera.transform.position = targetPosition;
         canCameraMove = true; // 移动完成后允许再次移动
-    }
-
-    // 恢复摄像机位置的方法
-    private void RestoreCameraPosition()
-    {
-        // 将摄像机位置设置为目标恢复位置
-        mainCamera.transform.position = targetRestorePosition;
     }
 
     // 恢复移动功能按钮的点击事件处理方法

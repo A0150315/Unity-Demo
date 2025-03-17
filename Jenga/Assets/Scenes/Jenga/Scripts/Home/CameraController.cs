@@ -34,8 +34,9 @@ public class CameraController : MonoBehaviour
     {
         if (mainCamera != null)
         {
+            Debug.Log("FollowBlock");
             Vector3 targetPosition = mainCamera.transform.position;
-            targetPosition.y = stackHeight + 5f;
+            targetPosition.y = (stackHeight + 5f - targetPosition.y) * Time.deltaTime;
             mainCamera.transform.position = Vector3.SmoothDamp(
                 mainCamera.transform.position,
                 targetPosition,

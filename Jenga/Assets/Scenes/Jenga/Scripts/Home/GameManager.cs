@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     [Header("游戏状态")]
     public bool isGameStarted = false;
     public int score = 0;
-    private float startDelay = 4f;
+    private float startDelay = 1f;
     private float startTime;
 
     [Header("UI元素")]
@@ -158,6 +158,7 @@ public class GameManager : MonoBehaviour
     {
         return isGameStarted && Time.time - startTime >= startDelay;
     }
+    
     // 使用协程处理倒计时
     private IEnumerator<object> CountdownRoutine()
     {
