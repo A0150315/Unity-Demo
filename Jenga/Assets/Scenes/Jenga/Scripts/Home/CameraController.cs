@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CameraController : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class CameraController : MonoBehaviour
     public float smoothTime = 0.3f;
     public float cameraMoveDownDistance = 3f;
     private float initialCameraHeight;
+    private bool isAdjustingCamera = false; // 是否正在调整相机
     
     void Awake()
     {
@@ -32,19 +34,67 @@ public class CameraController : MonoBehaviour
         initialCameraHeight = mainCamera.transform.position.y;
     }
     
-    public void FollowBlock(float stackHeight)
+    public void UpdateCameraPosition()
     {
-        if (mainCamera != null)
+        if (isAdjustingCamera || mainCamera == null) return;
+        
+        HomeBlockSpawner spawner = FindObjectOfType<HomeBlockSpawner>();
+        if (spawner == null || spawner.GetAllBlocks().Count == 0) return;
+        
+        // 只有当方块成功放置时，才调整相机位置
+        List<GameObject> allBlocks = spawner.GetAllBlocks();
+        if (allBlocks.Count > 0)
         {
-            Vector3 targetPosition = mainCamera.transform.position;
-            targetPosition.y = initialCameraHeight + stackHeight;
-            mainCamera.transform.position = Vector3.SmoothDamp(
-                mainCamera.transform.position,
-                targetPosition,
-                ref cameraVelocity,
-                smoothTime
-            );
+            StartCoroutine(AdjustCameraPosition(allBlocks));
         }
+    }
+    
+    private IEnumerator AdjustCameraPosition(List<GameObject> blocks)
+    {
+        isAdjustingCamera = true;
+        
+        // 等待一小段时间，确保方块已经稳定
+        yield return new WaitForSeconds(0.2f);
+        
+        // 获取最高方块的顶部位置
+        float highestPoint = 0f;
+        foreach (GameObject block in blocks)
+        {
+            if (block != null)
+            {
+                Collider collider = block.GetComponent<Collider>();
+                if (collider != null)
+                {
+                    float topY = collider.bounds.max.y;
+                    if (topY > highestPoint)
+                    {
+                        highestPoint = topY;
+                    }
+                }
+            }
+        }
+        
+        // 设置目标位置
+        Vector3 targetPosition = mainCamera.transform.position;
+        targetPosition.y = highestPoint + initialCameraHeight;
+        
+        // 平滑移动相机
+        float elapsedTime = 0f;
+        Vector3 startPosition = mainCamera.transform.position;
+        
+        while (elapsedTime < smoothTime)
+        {
+            mainCamera.transform.position = Vector3.Lerp(
+                startPosition,
+                targetPosition,
+                elapsedTime / smoothTime
+            );
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        
+        mainCamera.transform.position = targetPosition;
+        isAdjustingCamera = false;
     }
     
     public void MoveDownCamera()

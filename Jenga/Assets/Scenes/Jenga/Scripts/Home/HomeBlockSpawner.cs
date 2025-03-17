@@ -25,8 +25,6 @@ public class HomeBlockSpawner : MonoBehaviour
 
             if (currentBlock != null && isBlockFalling)
             {
-                CameraController.Instance.FollowBlock(GetStackHeight());
-
                 Rigidbody rb = currentBlock.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
@@ -38,6 +36,9 @@ public class HomeBlockSpawner : MonoBehaviour
                     else if (!isJustSpawned && rb.velocity.magnitude < 0.1f)
                     {
                         isBlockFalling = false;
+                        
+                        CameraController.Instance.UpdateCameraPosition();
+                        
                         currentBlock = null;
                     }
                 }
@@ -65,15 +66,6 @@ public class HomeBlockSpawner : MonoBehaviour
         GameManager.Instance.IncreaseScore();
 
         BlockAlignmentManager.Instance.CheckForAutomaticAlignment(currentBlock);
-    }
-
-    void CheckBlockFailure()
-    {
-        if (currentBlock.transform.position.y < groundYThreshold)
-        {
-            GameManager.Instance.AddFallenBlock(currentBlock);
-            GameManager.Instance.GameOver();
-        }
     }
 
     public float GetStackHeight()
