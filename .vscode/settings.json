@@ -1,6 +1,0 @@
-{
-    "svn.delete.ignoredRulesForDeletedFiles": [
-        "Jenga/Library/EditorInstance.json",
-        "Jenga/Temp"
-    ]
-}
