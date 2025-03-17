@@ -7,6 +7,74 @@
 [Bb]uilds/
 [Ll]ogs/
 [Uu]ser[Ss]ettings/
-.vs/
 
+# VS/VS Code/Rider生成的目录
+.vs/
+.vscode/
+.idea/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# Unity3D生成的元数据
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# Unity3D崩溃报告
+sysinfo.txt
+
+# 构建产物
+*.apk
+*.aab
+*.unitypackage
+*.app
+
+# Crashlytics生成的文件
+crashlytics-build.properties
+
+# macOS系统文件
 .DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Windows系统文件
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# 编译后的DLL
+*.dll
+*.so
+*.dylib
+*.exe
+
+# WebGL构建相关临时文件
+/[Ww]ebGL/
+/[Ww]ebGL[Bb]uild/
+
+# 自动生成的代码
+/[Aa]ssets/[Pp]lugins/
+/[Aa]ssets/[Ss]treaming[Aa]ssets/
+
+# 不要忽略的特定文件类型
+!*.dll.meta
+!*.so.meta
+!*.dylib.meta
+!Assets/Plugins/**/*.dll
+!Assets/Plugins/**/*.so
+!Assets/Plugins/**/*.dylib 
