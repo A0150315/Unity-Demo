@@ -54,6 +54,10 @@ public class UIController : MonoBehaviour
         {
             startGameButton.gameObject.SetActive(true);
         }
+        if (countdownText != null)
+        {
+            countdownText.gameObject.SetActive(false);
+        }
     }
 
     public void UpdateScore(int score)

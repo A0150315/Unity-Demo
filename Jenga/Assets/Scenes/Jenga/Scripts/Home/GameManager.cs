@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     [Header("UI元素")]
     public GameObject gameOverUI;
+    public Button startGameButton;
     public Button continueButton;
     public GameObject collisionPopupUI;
 
@@ -50,6 +51,7 @@ public class GameManager : MonoBehaviour
     {
         gameOverUI.SetActive(false);
         collisionPopupUI.SetActive(false);
+        startGameButton.onClick.AddListener(StartGame);
         continueButton.onClick.AddListener(ContinueGame);
         continueButton.gameObject.SetActive(false);
     }
