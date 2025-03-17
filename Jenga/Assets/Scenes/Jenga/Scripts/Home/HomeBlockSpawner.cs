@@ -80,8 +80,6 @@ public class HomeBlockSpawner : MonoBehaviour
     {
         if (allBlocks.Count > 0)
         {
-            Debug.Log("Block Height: " + allBlocks[0].transform.localScale.y);
-            // 估算堆栈高度
             return (allBlocks.Count - 1) * allBlocks[0].transform.localScale.y;
         }
         return 0f;

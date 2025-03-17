@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
     private Vector3 cameraVelocity = Vector3.zero;
     public float smoothTime = 0.3f;
     public float cameraMoveDownDistance = 3f;
+    private float initialCameraHeight;
     
     void Awake()
     {
@@ -28,15 +29,15 @@ public class CameraController : MonoBehaviour
         {
             mainCamera = Camera.main;
         }
+        initialCameraHeight = mainCamera.transform.position.y;
     }
     
     public void FollowBlock(float stackHeight)
     {
         if (mainCamera != null)
         {
-            Debug.Log("FollowBlock");
             Vector3 targetPosition = mainCamera.transform.position;
-            targetPosition.y = (stackHeight + 5f - targetPosition.y) * Time.deltaTime;
+            targetPosition.y = initialCameraHeight + stackHeight;
             mainCamera.transform.position = Vector3.SmoothDamp(
                 mainCamera.transform.position,
                 targetPosition,
