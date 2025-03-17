@@ -4,60 +4,60 @@ using System.Collections;
 
 public class CameraClickMove : MonoBehaviour
 {
-    // ¶¨Òå¾µÍ·Ã¿´ÎÒÆ¶¯µÄÆ«ÒÆÁ¿£¬¿ÉÔÚ Inspector Ãæ°åÖĞÉèÖÃ
+    // å®šä¹‰é•œå¤´æ¯æ¬¡ç§»åŠ¨çš„åç§»é‡ï¼Œå¯åœ¨ Inspector é¢æ¿ä¸­è®¾ç½®
     public Vector3 moveOffset;
-    // ÒıÓÃÖ÷ÉãÏñ»ú
+    // å¼•ç”¨ä¸»æ‘„åƒæœº
     public Camera mainCamera;
-    // ¼ÇÂ¼ÉãÏñ»úµÄ³õÊ¼Î»ÖÃ
+    // è®°å½•æ‘„åƒæœºçš„åˆå§‹ä½ç½®
     private Vector3 initialCameraPosition;
-    // ÓÃÓÚ´¥·¢ 4 Ãëµ¹¼ÆÊ±ºÍ¿ªÊ¼ÒÆ¶¯µÄ UI °´Å¥ÒıÓÃ
+    // ç”¨äºè§¦å‘ 4 ç§’å€’è®¡æ—¶å’Œå¼€å§‹ç§»åŠ¨çš„ UI æŒ‰é’®å¼•ç”¨
     public Button startButton;
-    // Á½¸öÓÃÓÚ»Ö¸´¾µÍ·Î»ÖÃµÄ UI °´Å¥µÄÒıÓÃ
+    // ä¸¤ä¸ªç”¨äºæ¢å¤é•œå¤´ä½ç½®çš„ UI æŒ‰é’®çš„å¼•ç”¨
     public Button button1;
     public Button button2;
-    // ±ê¼ÇÁ½¸ö°´Å¥ÊÇ·ñ¶¼±»µã»÷
+    // æ ‡è®°ä¸¤ä¸ªæŒ‰é’®æ˜¯å¦éƒ½è¢«ç‚¹å‡»
     private bool isButton1Clicked = false;
     private bool isButton2Clicked = false;
-    // ¿ÉÅäÖÃµÄÄ¿±ê»Ö¸´Î»ÖÃ
+    // å¯é…ç½®çš„ç›®æ ‡æ¢å¤ä½ç½®
     public Vector3 targetRestorePosition;
-    // ¿ØÖÆ¾µÍ·ÊÇ·ñ¿ÉÒÔÒÆ¶¯µÄ±êÖ¾Î»
+    // æ§åˆ¶é•œå¤´æ˜¯å¦å¯ä»¥ç§»åŠ¨çš„æ ‡å¿—ä½
     private bool canCameraMove = false;
-    // µ¯³öµÄ UI ÒıÓÃ
+    // å¼¹å‡ºçš„ UI å¼•ç”¨
     public GameObject popupUI;
-    // ĞÂÔöµÄÁíÒ»¸öµ¯³ö UI ÒıÓÃ
+    // æ–°å¢çš„å¦ä¸€ä¸ªå¼¹å‡º UI å¼•ç”¨
     public GameObject newPopupUI;
-    // ÓÃÓÚ»Ö¸´¾µÍ·ÒÆ¶¯¹¦ÄÜµÄµÚÒ»¸ö UI °´Å¥ÒıÓÃ
+    // ç”¨äºæ¢å¤é•œå¤´ç§»åŠ¨åŠŸèƒ½çš„ç¬¬ä¸€ä¸ª UI æŒ‰é’®å¼•ç”¨
     public Button restoreMoveButton1;
-    // ĞÂÔö£ºÓÃÓÚ»Ö¸´¾µÍ·ÒÆ¶¯¹¦ÄÜµÄµÚ¶ş¸ö UI °´Å¥ÒıÓÃ
+    // æ–°å¢ï¼šç”¨äºæ¢å¤é•œå¤´ç§»åŠ¨åŠŸèƒ½çš„ç¬¬äºŒä¸ª UI æŒ‰é’®å¼•ç”¨
     public Button restoreMoveButton2;
-    // ÒÆ¶¯ËÙ¶È£¬ÓÃÓÚÆ½»¬ÒÆ¶¯
+    // ç§»åŠ¨é€Ÿåº¦ï¼Œç”¨äºå¹³æ»‘ç§»åŠ¨
     public float moveSpeed = 5f;
-    // ÓÃÓÚ SmoothDamp µÄËÙ¶È±äÁ¿
+    // ç”¨äº SmoothDamp çš„é€Ÿåº¦å˜é‡
     private Vector3 velocity = Vector3.zero;
-    // Æ½»¬Ê±¼ä£¬¿ØÖÆ»ºÈë»º³öĞ§¹û
+    // å¹³æ»‘æ—¶é—´ï¼Œæ§åˆ¶ç¼“å…¥ç¼“å‡ºæ•ˆæœ
     public float smoothTime = 0.3f;
-    // ÓÃÓÚÏÔÊ¾µ¹¼ÆÊ±µÄ UI ÎÄ±¾×é¼ş
+    // ç”¨äºæ˜¾ç¤ºå€’è®¡æ—¶çš„ UI æ–‡æœ¬ç»„ä»¶
     public Text countdownText;
-    // ±ê¼ÇÊÇ·ñÕıÔÚµ¹¼ÆÊ±
+    // æ ‡è®°æ˜¯å¦æ­£åœ¨å€’è®¡æ—¶
     private bool isCountingDown = false;
 
     void Start()
     {
-        // Èç¹ûÃ»ÓĞÊÖ¶¯Ö¸¶¨ÉãÏñ»ú£¬Ä¬ÈÏÊ¹ÓÃÖ÷ÉãÏñ»ú
+        // å¦‚æœæ²¡æœ‰æ‰‹åŠ¨æŒ‡å®šæ‘„åƒæœºï¼Œé»˜è®¤ä½¿ç”¨ä¸»æ‘„åƒæœº
         if (mainCamera == null)
         {
             mainCamera = Camera.main;
         }
-        // ¼ÇÂ¼ÉãÏñ»úµÄ³õÊ¼Î»ÖÃ
+        // è®°å½•æ‘„åƒæœºçš„åˆå§‹ä½ç½®
         initialCameraPosition = mainCamera.transform.position;
 
-        // Îª¿ªÊ¼°´Å¥Ìí¼Óµã»÷ÊÂ¼ş¼àÌı
+        // ä¸ºå¼€å§‹æŒ‰é’®æ·»åŠ ç‚¹å‡»äº‹ä»¶ç›‘å¬
         if (startButton != null)
         {
             startButton.onClick.AddListener(StartFourSecondCountdown);
         }
 
-        // Îª»Ö¸´¾µÍ·Î»ÖÃµÄ°´Å¥Ìí¼Óµã»÷ÊÂ¼ş¼àÌı
+        // ä¸ºæ¢å¤é•œå¤´ä½ç½®çš„æŒ‰é’®æ·»åŠ ç‚¹å‡»äº‹ä»¶ç›‘å¬
         if (button1 != null)
         {
             button1.onClick.AddListener(OnButton1Clicked);
@@ -67,7 +67,7 @@ public class CameraClickMove : MonoBehaviour
             button2.onClick.AddListener(OnButton2Clicked);
         }
 
-        // Îª»Ö¸´ÒÆ¶¯¹¦ÄÜµÄ°´Å¥Ìí¼Óµã»÷ÊÂ¼ş¼àÌı
+        // ä¸ºæ¢å¤ç§»åŠ¨åŠŸèƒ½çš„æŒ‰é’®æ·»åŠ ç‚¹å‡»äº‹ä»¶ç›‘å¬
         if (restoreMoveButton1 != null)
         {
             restoreMoveButton1.onClick.AddListener(OnRestoreMoveButtonClicked);
@@ -77,7 +77,7 @@ public class CameraClickMove : MonoBehaviour
             restoreMoveButton2.onClick.AddListener(OnRestoreMoveButtonClicked);
         }
 
-        // ³õÊ¼Òş²Øµ¹¼ÆÊ±ÎÄ±¾
+        // åˆå§‹éšè—å€’è®¡æ—¶æ–‡æœ¬
         if (countdownText != null)
         {
             countdownText.gameObject.SetActive(false);
@@ -86,21 +86,21 @@ public class CameraClickMove : MonoBehaviour
 
     void Update()
     {
-        // ¼ì²éÁ½¸ö UI ÊÇ·ñµ¯³ö£¬Èôµ¯³öÔò¾µÍ·²»ÄÜÒÆ¶¯
+        // æ£€æŸ¥ä¸¤ä¸ª UI æ˜¯å¦å¼¹å‡ºï¼Œè‹¥å¼¹å‡ºåˆ™é•œå¤´ä¸èƒ½ç§»åŠ¨
         if ((popupUI != null && popupUI.activeSelf) || (newPopupUI != null && newPopupUI.activeSelf) || isCountingDown)
         {
             canCameraMove = false;
         }
 
-        // ¼ì²éÊó±ê×ó¼üÊÇ·ñ±»°´ÏÂÇÒ¾µÍ·¿ÉÒÔÒÆ¶¯
+        // æ£€æŸ¥é¼ æ ‡å·¦é”®æ˜¯å¦è¢«æŒ‰ä¸‹ä¸”é•œå¤´å¯ä»¥ç§»åŠ¨
         if (Input.GetMouseButtonDown(0) && canCameraMove)
         {
-            // Æô¶¯Ğ­³Ì½øĞĞÆ½»¬ÒÆ¶¯
+            // å¯åŠ¨åç¨‹è¿›è¡Œå¹³æ»‘ç§»åŠ¨
             StartCoroutine(SmoothMove(mainCamera.transform.position + moveOffset));
         }
     }
 
-    // ¿ªÊ¼ 4 Ãëµ¹¼ÆÊ±
+    // å¼€å§‹ 4 ç§’å€’è®¡æ—¶
     private void StartFourSecondCountdown()
     {
         if (!isCountingDown)
@@ -109,7 +109,7 @@ public class CameraClickMove : MonoBehaviour
         }
     }
 
-    // 4 Ãëµ¹¼ÆÊ±Ğ­³Ì
+    // 4 ç§’å€’è®¡æ—¶åç¨‹
     private IEnumerator FourSecondCountdown()
     {
         isCountingDown = true;
@@ -144,7 +144,7 @@ public class CameraClickMove : MonoBehaviour
         canCameraMove = true;
     }
 
-    // °´Å¥ 1 µã»÷ÊÂ¼ş´¦Àí·½·¨
+    // æŒ‰é’® 1 ç‚¹å‡»äº‹ä»¶å¤„ç†æ–¹æ³•
     private void OnButton1Clicked()
     {
         if (!isCountingDown)
@@ -154,7 +154,7 @@ public class CameraClickMove : MonoBehaviour
         }
     }
 
-    // °´Å¥ 2 µã»÷ÊÂ¼ş´¦Àí·½·¨
+    // æŒ‰é’® 2 ç‚¹å‡»äº‹ä»¶å¤„ç†æ–¹æ³•
     private void OnButton2Clicked()
     {
         if (!isCountingDown)
@@ -164,23 +164,23 @@ public class CameraClickMove : MonoBehaviour
         }
     }
 
-    // ¼ì²éÁ½¸ö°´Å¥ÊÇ·ñ¶¼±»µã»÷
+    // æ£€æŸ¥ä¸¤ä¸ªæŒ‰é’®æ˜¯å¦éƒ½è¢«ç‚¹å‡»
     private void CheckBothButtonsClicked()
     {
         if (isButton1Clicked && isButton2Clicked)
         {
-            // »Ö¸´¾µÍ·Î»ÖÃµ½Ä¿±êÎ»ÖÃ
+            // æ¢å¤é•œå¤´ä½ç½®åˆ°ç›®æ ‡ä½ç½®
             StartCoroutine(SmoothMove(targetRestorePosition));
-            // ÖØÖÃ°´Å¥µã»÷×´Ì¬
+            // é‡ç½®æŒ‰é’®ç‚¹å‡»çŠ¶æ€
             isButton1Clicked = false;
             isButton2Clicked = false;
         }
     }
 
-    // Æ½»¬ÒÆ¶¯ÉãÏñ»úµÄĞ­³Ì
+    // å¹³æ»‘ç§»åŠ¨æ‘„åƒæœºçš„åç¨‹
     private IEnumerator SmoothMove(Vector3 targetPosition)
     {
-        canCameraMove = false; // ÒÆ¶¯¹ı³ÌÖĞ½ûÖ¹ÔÙ´ÎÒÆ¶¯
+        canCameraMove = false; // ç§»åŠ¨è¿‡ç¨‹ä¸­ç¦æ­¢å†æ¬¡ç§»åŠ¨
         while (Vector3.Distance(mainCamera.transform.position, targetPosition) > 0.001f)
         {
             mainCamera.transform.position = Vector3.SmoothDamp(
@@ -193,17 +193,17 @@ public class CameraClickMove : MonoBehaviour
             yield return null;
         }
         mainCamera.transform.position = targetPosition;
-        canCameraMove = true; // ÒÆ¶¯Íê³ÉºóÔÊĞíÔÙ´ÎÒÆ¶¯
+        canCameraMove = true; // ç§»åŠ¨å®Œæˆåå…è®¸å†æ¬¡ç§»åŠ¨
     }
 
-    // »Ö¸´ÉãÏñ»úÎ»ÖÃµÄ·½·¨
+    // æ¢å¤æ‘„åƒæœºä½ç½®çš„æ–¹æ³•
     private void RestoreCameraPosition()
     {
-        // ½«ÉãÏñ»úÎ»ÖÃÉèÖÃÎªÄ¿±ê»Ö¸´Î»ÖÃ
+        // å°†æ‘„åƒæœºä½ç½®è®¾ç½®ä¸ºç›®æ ‡æ¢å¤ä½ç½®
         mainCamera.transform.position = targetRestorePosition;
     }
 
-    // »Ö¸´ÒÆ¶¯¹¦ÄÜ°´Å¥µÄµã»÷ÊÂ¼ş´¦Àí·½·¨
+    // æ¢å¤ç§»åŠ¨åŠŸèƒ½æŒ‰é’®çš„ç‚¹å‡»äº‹ä»¶å¤„ç†æ–¹æ³•
     private void OnRestoreMoveButtonClicked()
     {
         if (!isCountingDown)
