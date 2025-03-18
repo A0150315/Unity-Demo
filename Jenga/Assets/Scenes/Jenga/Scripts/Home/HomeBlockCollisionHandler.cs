@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections;
 
 public class HomeBlockCollisionHandler : MonoBehaviour
 {
     private GameManager gameManager;
     private bool isLocked = false;
-    private float snapThreshold = 0.4f;        // 吸附阈值
+    private float snapThreshold = 0.5f;        // 吸附阈值
     private Rigidbody rb;
     private Collider myCollider;
     private float placementTime; // 记录方块放置的时间
@@ -84,7 +85,7 @@ public class HomeBlockCollisionHandler : MonoBehaviour
     private System.Collections.IEnumerator AlignAndLockBlock(GameObject targetBlock)
     {
         isLocked = true;
-
+        
         // 立即禁用物理和碰撞检测，防止抖动
         if (rb != null)
         {
@@ -92,33 +93,34 @@ public class HomeBlockCollisionHandler : MonoBehaviour
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
-
+        
         // 禁用碰撞器，防止继续触发物理反应
         if (myCollider != null)
         {
             myCollider.enabled = false;
         }
-
+        
         // 等待一帧确保物理系统更新
         yield return null;
-
-        // 计算目标位置（在目标方块正上方）
-        Vector3 targetPosition = targetBlock.transform.position + Vector3.up * (targetBlock.transform.localScale.y);
+        
+        // 保持当前的水平位置，只调整垂直高度
+        float yPosition = targetBlock.transform.position.y + targetBlock.transform.localScale.y;
+        Vector3 targetPosition = new Vector3(transform.position.x, yPosition, transform.position.z);
         Quaternion targetRotation = Quaternion.identity;
 
         // 直接设置位置，避免使用Lerp产生的中间状态
         transform.position = targetPosition;
         transform.rotation = targetRotation;
-
+        
         // 等待一帧
         yield return null;
-
+        
         // 重新启用碰撞器，但保持物体为运动学状态
         if (myCollider != null)
         {
             myCollider.enabled = true;
         }
-
+        
         // 确保物理组件保持锁定状态
         if (rb != null)
         {
