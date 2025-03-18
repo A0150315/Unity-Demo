@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     [Header("引用")]
     public HomeBlockSpawner blockSpawner;
     public UIController uiController;
+    public StructureStabilityManager stabilityManager;
 
     private List<GameObject> fallenBlocks = new List<GameObject>();
 
@@ -45,6 +46,18 @@ public class GameManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         InitializeUI();
         isGameStarted = false;
+        
+        // 如果没有找到稳定性管理器，尝试查找或创建一个
+        if (stabilityManager == null)
+        {
+            stabilityManager = FindObjectOfType<StructureStabilityManager>();
+            if (stabilityManager == null)
+            {
+                Debug.LogError("稳定性管理器未找到");
+                GameObject stabilityObj = new GameObject("StructureStabilityManager");
+                stabilityManager = stabilityObj.AddComponent<StructureStabilityManager>();
+            }
+        }
     }
 
     private void InitializeUI()
@@ -111,6 +124,12 @@ public class GameManager : MonoBehaviour
         }
         isGameStarted = false;
         continueButton.gameObject.SetActive(true);
+
+        // 停止所有方块的摇晃
+        if (stabilityManager != null)
+        {
+            stabilityManager.StopAllShaking();
+        }
 
         score = 0;
         if (UIManager.Instance != null)
