@@ -57,6 +57,7 @@ public class HomeBlockSpawner : MonoBehaviour
 
         int randomIndex = Random.Range(0, blockPrefabs.Length);
         currentBlock = Instantiate(blockPrefabs[randomIndex], spawnPoint.position, Quaternion.identity);
+        currentBlock.tag = "Cube";  // 设置Tag
         allBlocks.Add(currentBlock);
         isBlockFalling = true;
         isJustSpawned = true;
