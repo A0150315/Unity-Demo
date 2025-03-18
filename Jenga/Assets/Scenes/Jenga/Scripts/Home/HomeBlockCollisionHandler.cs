@@ -7,6 +7,7 @@ public class HomeBlockCollisionHandler : MonoBehaviour
     private GameManager gameManager;
     private bool isLocked = false;
     private float snapThreshold = 0.5f;        // 吸附阈值
+    private float velocityThreshold = 0.3f;    // 速度阈值，小于此值才触发吸附
     private Rigidbody rb;
     private Collider myCollider;
     private float placementTime; // 记录方块放置的时间
@@ -42,7 +43,6 @@ public class HomeBlockCollisionHandler : MonoBehaviour
         // 检查是否碰到了FailCube
         if (otherObject.CompareTag("FailCube"))
         {
-
             // 销毁当前方块
             Destroy(gameObject);
             return; // 结束方法执行
@@ -67,12 +67,16 @@ public class HomeBlockCollisionHandler : MonoBehaviour
 
             if (shouldMove)
             {
-                // 计算相对位置
-                float verticalDistance = Math.Abs(transform.position.x - otherObject.transform.position.x);
+                // 获取当前方块的速度
+                float currentVelocity = rb.velocity.magnitude;
 
-                // 确保当前方块在上方才进行吸附
+                // 计算相对位置
+                float horizontalDistance = Math.Abs(transform.position.x - otherObject.transform.position.x);
+
+                // 确保当前方块在上方才进行吸附，且速度小于阈值
                 if (transform.position.y > otherObject.transform.position.y &&
-                    verticalDistance < snapThreshold)
+                    horizontalDistance < snapThreshold &&
+                    currentVelocity < velocityThreshold)
                 {
                     StartCoroutine(AlignAndLockBlock(otherObject));
                 }
