@@ -7,7 +7,6 @@ public class HomeBlockCollisionHandler : MonoBehaviour
     private GameManager gameManager;
     private bool isLocked = false;
     private float snapThreshold = 0.5f;        // 吸附阈值
-    private float velocityThreshold = 0.3f;    // 速度阈值，小于此值才触发吸附
     private Rigidbody rb;
     private Collider myCollider;
     private float placementTime; // 记录方块放置的时间
@@ -75,8 +74,7 @@ public class HomeBlockCollisionHandler : MonoBehaviour
 
                 // 确保当前方块在上方才进行吸附，且速度小于阈值
                 if (transform.position.y > otherObject.transform.position.y &&
-                    horizontalDistance < snapThreshold &&
-                    currentVelocity < velocityThreshold)
+                    horizontalDistance < snapThreshold)
                 {
                     StartCoroutine(AlignAndLockBlock(otherObject));
                 }
