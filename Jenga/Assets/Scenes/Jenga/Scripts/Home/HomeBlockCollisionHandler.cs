@@ -23,11 +23,35 @@ public class HomeBlockCollisionHandler : MonoBehaviour
     {
         if (isLocked) return;
 
-        GameObject otherBlock = collision.gameObject;
-        HomeBlockCollisionHandler otherHandler = otherBlock.GetComponent<HomeBlockCollisionHandler>();
+        if (gameManager != null)
+        {
+            gameManager.OnBlockCollision(collision);
+        }
+        else
+        {
+            // 如果GameManager未找到，尝试再次查找
+            gameManager = GameManager.Instance;
+            if (gameManager != null)
+            {
+                gameManager.OnBlockCollision(collision);
+            }
+        }
+
+        GameObject otherObject = collision.gameObject;
+
+        // 检查是否碰到了FailCube
+        if (otherObject.CompareTag("FailCube"))
+        {
+
+            // 销毁当前方块
+            Destroy(gameObject);
+            return; // 结束方法执行
+        }
+
+        HomeBlockCollisionHandler otherHandler = otherObject.GetComponent<HomeBlockCollisionHandler>();
 
         // 检查是否与另一个方块碰撞
-        if (otherBlock.CompareTag("Cube") && !isLocked)
+        if (otherObject.CompareTag("Cube") && !isLocked)
         {
             // 如果对方方块已经锁定，或者是较早放置的方块，则当前方块应该移动
             bool shouldMove = true;
@@ -44,28 +68,14 @@ public class HomeBlockCollisionHandler : MonoBehaviour
             if (shouldMove)
             {
                 // 计算相对位置
-                float verticalDistance = Math.Abs(transform.position.x - otherBlock.transform.position.x);
+                float verticalDistance = Math.Abs(transform.position.x - otherObject.transform.position.x);
 
                 // 确保当前方块在上方才进行吸附
-                if (transform.position.y > otherBlock.transform.position.y &&
+                if (transform.position.y > otherObject.transform.position.y &&
                     verticalDistance < snapThreshold)
                 {
-                    StartCoroutine(AlignAndLockBlock(otherBlock));
+                    StartCoroutine(AlignAndLockBlock(otherObject));
                 }
-            }
-        }
-
-        if (gameManager != null)
-        {
-            gameManager.OnBlockCollision(collision);
-        }
-        else
-        {
-            // 如果GameManager未找到，尝试再次查找
-            gameManager = GameManager.Instance;
-            if (gameManager != null)
-            {
-                gameManager.OnBlockCollision(collision);
             }
         }
     }
@@ -85,7 +95,7 @@ public class HomeBlockCollisionHandler : MonoBehaviour
     private System.Collections.IEnumerator AlignAndLockBlock(GameObject targetBlock)
     {
         isLocked = true;
-        
+
         // 立即禁用物理和碰撞检测，防止抖动
         if (rb != null)
         {
@@ -93,16 +103,16 @@ public class HomeBlockCollisionHandler : MonoBehaviour
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
-        
+
         // 禁用碰撞器，防止继续触发物理反应
         if (myCollider != null)
         {
             myCollider.enabled = false;
         }
-        
+
         // 等待一帧确保物理系统更新
         yield return null;
-        
+
         // 保持当前的水平位置，只调整垂直高度
         float yPosition = targetBlock.transform.position.y + targetBlock.transform.localScale.y;
         Vector3 targetPosition = new Vector3(transform.position.x, yPosition, transform.position.z);
@@ -111,16 +121,16 @@ public class HomeBlockCollisionHandler : MonoBehaviour
         // 直接设置位置，避免使用Lerp产生的中间状态
         transform.position = targetPosition;
         transform.rotation = targetRotation;
-        
+
         // 等待一帧
         yield return null;
-        
+
         // 重新启用碰撞器，但保持物体为运动学状态
         if (myCollider != null)
         {
             myCollider.enabled = true;
         }
-        
+
         // 确保物理组件保持锁定状态
         if (rb != null)
         {
