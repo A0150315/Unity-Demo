@@ -8,22 +8,25 @@ public class StructureStabilityManager : MonoBehaviour
 
     [Header("摇晃设置")]
     [SerializeField] private int topBlocksToShake = 3;        // 顶部要摇晃的方块数量
-    [SerializeField] private float maxShakeAngle = 3f;        // 最大摇晃角度
+    [SerializeField] private float maxShakeOffset = 0.15f;    // 最大摇晃位移
     [SerializeField] private float shakeSpeed = 1.5f;         // 摇晃速度
     [SerializeField] private float heightThreshold = 5f;      // 开始摇晃的高度阈值
     [SerializeField] private float transitionDuration = 0.5f; // 过渡动画持续时间
 
     private HomeBlockSpawner blockSpawner;
     private List<GameObject> shakingBlocks = new List<GameObject>();
-    private GameObject pivotBlock;  // 作为旋转中心的方块
-    private Vector3 pivotOriginalPosition; // 旋转中心的原始位置
-    private List<Vector3> relativePositions = new List<Vector3>(); // 其他方块相对于旋转中心的位置
+    private List<Vector3> originalPositions = new List<Vector3>(); // 方块的原始位置
 
     // 平滑过渡变量
     private List<GameObject> previousShakingBlocks = new List<GameObject>();
-    private Vector3 previousPivotPosition;
-    private List<Vector3> previousRelativePositions = new List<Vector3>();
+    private List<Vector3> previousOriginalPositions = new List<Vector3>();
     private float transitionProgress = 1.0f; // 1.0表示过渡完成
+    
+    // 用于防止第一次应用效果时的突然位移
+    private bool isFirstApply = true;
+    private float lastXOffset = 0f;
+    private float updateTimer = 0f;
+    private float updateInterval = 0.3f;
 
     private void Awake()
     {
@@ -40,7 +43,7 @@ public class StructureStabilityManager : MonoBehaviour
     private void Start()
     {
         blockSpawner = FindObjectOfType<HomeBlockSpawner>();
-        InvokeRepeating("UpdateShakingBlocks", 0.5f, 0.3f); // 每1秒更新一次摇晃的方块，延长间隔减少抖动
+        // InvokeRepeating("UpdateShakingBlocks", 0.5f, 0.3f); // 减少更新间隔，提高响应性
     }
 
     private void Update()
@@ -68,7 +71,6 @@ public class StructureStabilityManager : MonoBehaviour
 
         for (int i = 0; i < list1.Count; i++)
         {
-            // 如果任何一个对象不在另一个列表中，则列表不相同
             if (!list2.Contains(list1[i]))
                 return false;
         }
@@ -76,11 +78,17 @@ public class StructureStabilityManager : MonoBehaviour
         return true;
     }
 
+    // 在新方块被固定时立即调用此方法
+    public void ForceUpdateShakingBlocks()
+    {
+        UpdateShakingBlocks();
+    }
+
     // 更新需要摇晃的顶部方块
     private void UpdateShakingBlocks()
     {
-        if (blockSpawner == null
-        || GameManager.Instance == null
+        if (blockSpawner == null 
+        || GameManager.Instance == null 
         || !GameManager.Instance.isGameStarted
         || blockSpawner.GetIsBlockFalling()
         ) return;
@@ -91,19 +99,12 @@ public class StructureStabilityManager : MonoBehaviour
 
         // 在开始更新之前，保存当前的摇晃状态用于平滑过渡
         previousShakingBlocks = new List<GameObject>(shakingBlocks);
-        if (pivotBlock != null)
-        {
-            previousPivotPosition = pivotOriginalPosition;
-            previousRelativePositions = new List<Vector3>(relativePositions);
-        }
+        previousOriginalPositions = new List<Vector3>(originalPositions);
 
-        // 恢复所有方块的原始位置
-        ResetAllBlocks();
-
-        // 清除之前的摇晃状态
+        // 清除之前的摇晃状态，但不重置方块位置
+        List<GameObject> oldShakingBlocks = new List<GameObject>(shakingBlocks);
         shakingBlocks.Clear();
-        relativePositions.Clear();
-        pivotBlock = null;
+        originalPositions.Clear();
 
         // 检查塔是否高于阈值
         float towerHeight = blockSpawner.GetStackHeight();
@@ -117,44 +118,89 @@ public class StructureStabilityManager : MonoBehaviour
 
         if (sortedBlocks.Count == 0) return;
 
+        // 找出最顶部的连续方块
+        List<GameObject> continuousTopBlocks = new List<GameObject>();
+        
+        // 添加最高的方块
+        continuousTopBlocks.Add(sortedBlocks[0]);
+        float expectedNextY = sortedBlocks[0].transform.position.y - sortedBlocks[0].transform.localScale.y * 0.9f; // 稍微放宽条件
+        
+        // 从第二个方块开始检查
+        for (int i = 1; i < sortedBlocks.Count && continuousTopBlocks.Count < topBlocksToShake; i++)
+        {
+            GameObject currentBlock = sortedBlocks[i];
+            float currentY = currentBlock.transform.position.y;
+            
+            // 如果这个方块与上一个方块相邻
+            if (Mathf.Abs(currentY - expectedNextY) < 0.5f) // 使用更宽松的阈值
+            {
+                continuousTopBlocks.Add(currentBlock);
+                expectedNextY = currentY - currentBlock.transform.localScale.y * 0.9f;
+            }
+            else
+            {
+                // 如果发现不连续的方块，停止选择
+                break;
+            }
+        }
+        
+        if (continuousTopBlocks.Count == 0) return;
+        
         // 选择顶部的几个方块进行摇晃
-        int blocksToShake = Mathf.Min(topBlocksToShake, sortedBlocks.Count);
+        int blocksToShake = Mathf.Min(topBlocksToShake, continuousTopBlocks.Count);
         if (blocksToShake <= 0) return;
-
-        // 设置旋转中心为最底部的晃动方块
-        pivotBlock = sortedBlocks[blocksToShake - 1];
-        pivotOriginalPosition = pivotBlock.transform.position;
 
         // 添加所有要晃动的方块
         for (int i = 0; i < blocksToShake; i++)
         {
-            GameObject block = sortedBlocks[i];
+            GameObject block = continuousTopBlocks[i];
             shakingBlocks.Add(block);
-
-            // 记录每个方块相对于旋转中心的位置
-            relativePositions.Add(block.transform.position - pivotOriginalPosition);
+            
+            // 记录每个方块的当前位置（包括可能的偏移）
+            // 这样可以防止突然的位置跳变
+            originalPositions.Add(block.transform.position);
+            
+            // 如果方块之前不在晃动列表中，修正其原始位置（去除当前可能的偏移）
+            if (!oldShakingBlocks.Contains(block))
+            {
+                // 计算当前可能的偏移并去除
+                float currentXOffset = Mathf.Sin(Time.time * shakeSpeed) * maxShakeOffset;
+                Vector3 pos = originalPositions[i];
+                originalPositions[i] = new Vector3(pos.x - currentXOffset, pos.y, pos.z);
+            }
         }
-
+        
         // 如果方块组合发生变化，启动过渡
         if (!AreBlockListsEqual(previousShakingBlocks, shakingBlocks) && previousShakingBlocks.Count > 0)
         {
             Debug.Log("方块组合发生变化，启动平滑过渡");
             transitionProgress = 0f;
         }
+        
+        // 首次更新后不再是第一次应用
+        isFirstApply = false;
     }
 
-    // 应用摇晃效果 - 以底部晃动方块为中心，整体摇晃，带平滑过渡
+    // 应用摇晃效果 - City Bloxx风格的水平平移
     private void ApplyShakingEffect()
     {
-        if (shakingBlocks.Count == 0 && previousShakingBlocks.Count == 0)
+        if (shakingBlocks.Count == 0 && previousShakingBlocks.Count == 0) 
             return;
 
-        // 计算当前的摇晃角度 - 只在Z轴方向摇晃（左右摇晃）
-        float zAngle = Mathf.Sin(Time.time * shakeSpeed) * maxShakeAngle;
-
-        // 创建一个以pivotBlock位置为中心的旋转矩阵
-        Quaternion rotation = Quaternion.Euler(0, 0, zAngle);
-
+        // 计算当前的水平偏移 - 只在X轴方向摇晃（左右摇晃）
+        float xOffset = Mathf.Sin(Time.time * shakeSpeed) * maxShakeOffset;
+        
+        // 为了防止第一次应用时的跳变，使用平滑过渡
+        if (isFirstApply)
+        {
+            xOffset = Mathf.Lerp(0f, xOffset, 0.1f);
+            isFirstApply = false;
+        }
+        
+        // 平滑偏移变化，减少抖动
+        xOffset = Mathf.Lerp(lastXOffset, xOffset, 0.2f);
+        lastXOffset = xOffset;
+        
         // 正在进行过渡
         if (transitionProgress < 1.0f && previousShakingBlocks.Count > 0)
         {
@@ -162,61 +208,36 @@ public class StructureStabilityManager : MonoBehaviour
             for (int i = 0; i < previousShakingBlocks.Count; i++)
             {
                 GameObject block = previousShakingBlocks[i];
-                if (block == null) continue;
-
-                // 检查此方块是否也在当前摇晃列表中
-                if (shakingBlocks.Contains(block)) continue;
-
-                // 计算旧的旋转位置
-                Vector3 oldRotatedPosition = previousPivotPosition + (rotation * previousRelativePositions[i]);
-
-                // 恢复原始位置（线性插值）
-                Vector3 originalPosition = previousPivotPosition + previousRelativePositions[i];
-                block.transform.position = Vector3.Lerp(oldRotatedPosition, originalPosition, transitionProgress);
-
-                // 恢复原始旋转（线性插值）
-                block.transform.rotation = Quaternion.Slerp(rotation, Quaternion.identity, transitionProgress);
+                if (block == null || shakingBlocks.Contains(block)) continue;
+                
+                // 渐渐减小晃动幅度
+                float fadingOffset = xOffset * (1.0f - transitionProgress);
+                Vector3 originalPos = previousOriginalPositions[i];
+                Vector3 targetPos = new Vector3(originalPos.x + fadingOffset, originalPos.y, originalPos.z);
+                
+                // 设置位置
+                block.transform.position = targetPos;
             }
         }
 
         // 处理当前的方块组
-        if (shakingBlocks.Count > 0 && pivotBlock != null)
+        if (shakingBlocks.Count > 0)
         {
-            // 应用旋转到所有方块
+            // 应用水平摇晃到所有方块
             for (int i = 0; i < shakingBlocks.Count; i++)
             {
                 GameObject block = shakingBlocks[i];
                 if (block == null) continue;
-
-                // 计算旋转后的位置（以pivotBlock为中心旋转）
-                Vector3 rotatedPosition = pivotOriginalPosition + (rotation * relativePositions[i]);
-
-                // 如果在过渡中，则进行插值
-                if (transitionProgress < 1.0f && previousShakingBlocks.Contains(block))
-                {
-                    // 查找在旧列表中的索引
-                    int oldIndex = previousShakingBlocks.IndexOf(block);
-                    if (oldIndex >= 0 && oldIndex < previousRelativePositions.Count)
-                    {
-                        // 计算旧的旋转位置
-                        Vector3 oldRotatedPosition = previousPivotPosition + (rotation * previousRelativePositions[oldIndex]);
-
-                        // 在旧位置和新位置之间进行插值
-                        block.transform.position = Vector3.Lerp(oldRotatedPosition, rotatedPosition, transitionProgress);
-                    }
-                    else
-                    {
-                        block.transform.position = rotatedPosition;
-                    }
-                }
-                else
-                {
-                    // 设置方块的位置
-                    block.transform.position = rotatedPosition;
-                }
-
-                // 应用相同的旋转到方块自身
-                block.transform.rotation = rotation;
+                
+                // 如果在过渡中，则逐渐增加晃动幅度
+                float currentOffset = transitionProgress < 1.0f ? xOffset * transitionProgress : xOffset;
+                
+                // 计算方块的新位置 (只改变X坐标，保持Y和Z不变)
+                Vector3 originalPos = originalPositions[i];
+                Vector3 targetPos = new Vector3(originalPos.x + currentOffset, originalPos.y, originalPos.z);
+                
+                // 设置方块的位置
+                block.transform.position = targetPos;
             }
         }
     }
@@ -224,18 +245,16 @@ public class StructureStabilityManager : MonoBehaviour
     // 重置所有方块到原始状态
     private void ResetAllBlocks()
     {
-        if (pivotBlock == null) return;
-
         for (int i = 0; i < shakingBlocks.Count; i++)
         {
             GameObject block = shakingBlocks[i];
             if (block == null) continue;
-
+            
             // 恢复原始位置
-            block.transform.position = pivotOriginalPosition + relativePositions[i];
-
-            // 恢复原始旋转
-            block.transform.rotation = Quaternion.identity;
+            if (i < originalPositions.Count)
+            {
+                block.transform.position = originalPositions[i];
+            }
         }
     }
 
@@ -244,16 +263,11 @@ public class StructureStabilityManager : MonoBehaviour
     {
         ResetAllBlocks();
         shakingBlocks.Clear();
-        relativePositions.Clear();
-        pivotBlock = null;
-
+        originalPositions.Clear();
+        
         previousShakingBlocks.Clear();
-        previousRelativePositions.Clear();
+        previousOriginalPositions.Clear();
         transitionProgress = 1.0f;
-    }
-
-    public void ForceUpdateShakingBlocks()
-    {
-        UpdateShakingBlocks();
+        isFirstApply = true;
     }
 }
