@@ -144,5 +144,9 @@ public class HomeBlockCollisionHandler : MonoBehaviour
         {
             // gameManager.OnBlockPlaced(gameObject);
         }
+
+        if (StructureStabilityManager.Instance != null){
+            StructureStabilityManager.Instance.ForceUpdateShakingBlocks();
+        }
     }
 }
