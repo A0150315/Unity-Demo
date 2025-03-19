@@ -46,7 +46,11 @@ public class StructureStabilityManager : MonoBehaviour
     // 更新需要摇晃的顶部方块
     private void UpdateShakingBlocks()
     {
-        if (blockSpawner == null || GameManager.Instance == null || !GameManager.Instance.isGameStarted) return;
+        if (blockSpawner == null
+        || GameManager.Instance == null
+        || !GameManager.Instance.isGameStarted
+        || blockSpawner.GetIsBlockFalling()
+        ) return;
 
         // 获取所有已放置的方块
         List<GameObject> allBlocks = blockSpawner.GetAllBlocks();
@@ -83,7 +87,7 @@ public class StructureStabilityManager : MonoBehaviour
         {
             GameObject block = sortedBlocks[i];
             shakingBlocks.Add(block);
-            
+
             // 记录每个方块相对于旋转中心的位置
             relativePositions.Add(block.transform.position - pivotOriginalPosition);
         }
@@ -96,22 +100,22 @@ public class StructureStabilityManager : MonoBehaviour
 
         // 计算当前的摇晃角度 - 只在Z轴方向摇晃（左右摇晃）
         float zAngle = Mathf.Sin(Time.time * shakeSpeed) * maxShakeAngle;
-        
+
         // 创建一个以pivotBlock位置为中心的旋转矩阵
         Quaternion rotation = Quaternion.Euler(0, 0, zAngle);
-        
+
         // 应用旋转到所有方块
         for (int i = 0; i < shakingBlocks.Count; i++)
         {
             GameObject block = shakingBlocks[i];
             if (block == null) continue;
-            
+
             // 计算旋转后的位置（以pivotBlock为中心旋转）
             Vector3 rotatedPosition = pivotOriginalPosition + (rotation * relativePositions[i]);
-            
+
             // 设置方块的位置
             block.transform.position = rotatedPosition;
-            
+
             // 应用相同的旋转到方块自身
             block.transform.rotation = rotation;
         }
@@ -121,15 +125,15 @@ public class StructureStabilityManager : MonoBehaviour
     private void ResetAllBlocks()
     {
         if (pivotBlock == null) return;
-        
+
         for (int i = 0; i < shakingBlocks.Count; i++)
         {
             GameObject block = shakingBlocks[i];
             if (block == null) continue;
-            
+
             // 恢复原始位置
             block.transform.position = pivotOriginalPosition + relativePositions[i];
-            
+
             // 恢复原始旋转
             block.transform.rotation = Quaternion.identity;
         }
@@ -143,4 +147,4 @@ public class StructureStabilityManager : MonoBehaviour
         relativePositions.Clear();
         pivotBlock = null;
     }
-} 
+}

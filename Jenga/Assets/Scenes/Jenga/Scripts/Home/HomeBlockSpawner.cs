@@ -101,4 +101,9 @@ public class HomeBlockSpawner : MonoBehaviour
             Destroy(blockToRemove);
         }
     }
+    
+    public bool GetIsBlockFalling()
+    {
+        return isBlockFalling;
+    }
 }
