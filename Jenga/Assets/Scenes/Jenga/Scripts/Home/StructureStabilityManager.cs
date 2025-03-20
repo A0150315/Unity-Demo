@@ -22,11 +22,14 @@ public class StructureStabilityManager : MonoBehaviour
     private List<Vector3> previousOriginalPositions = new List<Vector3>();
     private float transitionProgress = 1.0f; // 1.0表示过渡完成
 
-    // 用于防止第一次应用效果时的突然位移
-    private bool isFirstApply = true;
-    private float lastXOffset = 0f;
-    private float updateTimer = 0f;
-    private float updateInterval = 0.3f;
+
+    private float targetOffset = 0f;
+    private float currentOffset = 0f;
+    private float smoothSpeed = 5f;  // 平滑速度系数
+
+    // 锁定同一帧的偏移值，避免不同方块使用不同偏移
+    private float currentFrameOffset = 0f;
+    private float lastFrameTime = 0f;
 
     private void Awake()
     {
@@ -59,8 +62,28 @@ public class StructureStabilityManager : MonoBehaviour
                 transitionProgress = 1.0f;
             }
         }
+        // 更新偏移平滑值
+        UpdateOffsetValue();
 
         ApplyShakingEffect();
+    }
+
+    // 计算并平滑处理偏移值
+    private void UpdateOffsetValue()
+    {
+        // 如果是新的一帧，重新计算目标偏移
+        if (Time.frameCount != lastFrameTime)
+        {
+            // 计算目标偏移值
+            targetOffset = Mathf.Sin(Time.time * shakeSpeed) * maxShakeOffset;
+
+            // 平滑过渡到目标偏移
+            currentOffset = Mathf.Lerp(currentOffset, targetOffset, Time.deltaTime * smoothSpeed);
+
+            // 保存当前帧的偏移值和时间
+            currentFrameOffset = currentOffset;
+            lastFrameTime = Time.frameCount;
+        }
     }
 
     // 比较两个方块列表是否相同
@@ -159,11 +182,8 @@ public class StructureStabilityManager : MonoBehaviour
             return;
 
         // 计算当前的水平偏移 - 只在X轴方向摇晃（左右摇晃）
-        float xOffset = Mathf.Sin(Time.time * shakeSpeed) * maxShakeOffset;
+        float xOffset = currentFrameOffset;
 
-        // 平滑偏移变化，减少抖动
-        xOffset = Mathf.Lerp(lastXOffset, xOffset, 0.2f);
-        lastXOffset = xOffset;
 
         // 正在进行过渡
         if (previousShakingBlocks.Count > 0)
@@ -237,6 +257,5 @@ public class StructureStabilityManager : MonoBehaviour
         previousShakingBlocks.Clear();
         previousOriginalPositions.Clear();
         transitionProgress = 1.0f;
-        isFirstApply = true;
     }
 }
